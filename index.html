@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="reset.css">
+  <link rel="stylesheet" href="style.css">
+  <title>2048 - JS</title>
+</head>
+
+<body>
+  <header class="game-info">
+    <h1>2048</h1>
+    <p>Score: <span id="score"></span></p>
+  </header>
+  <div id='game-board' class="grid">
+
+  </div>
+  <div id="end-game-container" class="end-game">
+    <h1 id="end-game">You Win!!!</h1>
+    <p>Your final score for this round was:</p>
+    <p id='end-score' class="final-score">2048</p>
+    <button class="btn" id="play-again">Play Again</button>
+    <ol class="scores-list" id="scores-list">
+    </ol>
+
+  </div>
+  <script src="script.js"></script>
+</body>
+
+</html>

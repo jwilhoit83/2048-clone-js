@@ -1,0 +1,173 @@
+html {
+  --clr-neutral-100: #eceff4;
+  --clr-neutral-200: #e5e9f0;
+  --clr-neutral-300: #d8dee9;
+  --clr-neutral-600: #4c566a;
+  --clr-neutral-700: #434c5e;
+  --clr-neutral-800: #3b4252;
+  --clr-neutral-900: #2e3440;
+  --clr-neutral-950: hsl(220, 16%, 22%, 0.8);
+
+  --clr-accent-blue-100: hsl(179, 25%, 65%);
+  --clr-accent-blue-150: hsl(179, 25%, 45%);
+  --clr-accent-blue-200: hsl(193, 43%, 67%);
+  --clr-accent-blue-250: hsl(193, 43%, 47%);
+  --clr-accent-blue-300: hsl(210, 34%, 63%);
+  --clr-accent-blue-350: hsl(210, 34%, 43%);
+  --clr-accent-blue-400: hsl(213, 32%, 52%);
+  --clr-accent-blue-450: hsl(213, 32%, 32%);
+
+  --clr-accent-red-100: hsl(354, 42%, 56%);
+  --clr-accent-red-150: hsl(354, 42%, 36%);
+  --clr-accent-orange-100: hsl(14, 51%, 63%);
+  --clr-accent-orange-150: hsl(14, 51%, 43%);
+  --clr-accent-yellow-100: hsl(40, 71%, 73%);
+  --clr-accent-yellow-150: hsl(40, 71%, 53%);
+  --clr-accent-green-100: hsl(92, 28%, 65%);
+  --clr-accent-green-150: hsl(92, 28%, 45%);
+  --clr-accent-pink-100: hsl(311, 20%, 63%);
+  --clr-accent-pink-150: hsl(311, 20%, 43%);
+}
+
+body {
+  font-family: 'Roboto', sans-serif;
+  color: var(--clr-neutral-300);
+  background-color: var(--clr-neutral-600);
+}
+
+.btn {
+  color: var(--clr-accent-pink-100);
+  background-color: var(--clr-neutral-700);
+
+  font-size: 1.25rem;
+  font-weight: 700;
+
+  border-radius: 0.5rem;
+  border: 0.125rem solid var(--clr-accent-pink-100);
+  cursor: pointer;
+  padding: 0.5rem 1rem;
+}
+
+.game-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 0.5rem;
+}
+
+.grid {
+  max-width: max-content;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(4, 1fr);
+
+  padding: 1rem;
+  margin-inline: auto;
+}
+
+.grid > div {
+  position: relative;
+  margin: 0.125rem;
+  height: min(10rem, 15vw);
+  width: min(10rem, 15vw);
+  line-height: min(9rem, 13vw);
+
+  font-size: 1rem;
+  font-weight: 700;
+  text-align: center;
+
+  background-color: var(--bg, var(--clr-neutral-600));
+  color: var(--fg);
+  border: 1vw solid var(--bc, var(--fg));
+  border-radius: 0.5rem;
+}
+
+.grid > .zero::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 0.5rem;
+  background-color: var(--clr-neutral-900);
+}
+
+.grid > .two {
+  --fg: var(--clr-accent-blue-100);
+  --bg: var(--clr-neutral-700);
+}
+.grid > .four {
+  --fg: var(--clr-accent-blue-100);
+  --bg: var(--clr-neutral-700);
+  --bc: var(--clr-accent-blue-150);
+}
+.grid > .eight {
+  --fg: var(--clr-accent-yellow-100);
+  --bg: var(--clr-neutral-700);
+}
+.grid > .sixteen {
+  --fg: var(--clr-accent-yellow-100);
+  --bg: var(--clr-neutral-700);
+  --bc: var(--clr-accent-yellow-150);
+}
+.grid > .thirty-two {
+  --fg: var(--clr-accent-pink-100);
+  --bg: var(--clr-neutral-700);
+}
+.grid > .sixty-four {
+  --fg: var(--clr-accent-pink-100);
+  --bg: var(--clr-neutral-700);
+  --bc: var(--clr-accent-pink-150);
+}
+.grid > .one-twenty-eight {
+  --fg: var(--clr-accent-orange-100);
+  --bg: var(--clr-neutral-700);
+}
+.grid > .two-fifty-six {
+  --fg: var(--clr-accent-orange-100);
+  --bg: var(--clr-neutral-700);
+  --bc: var(--clr-accent-orange-150);
+}
+.grid > .five-twelve {
+  --fg: var(--clr-accent-green-100);
+  --bg: var(--clr-neutral-700);
+}
+.grid > .ten-twenty-four {
+  --fg: var(--clr-accent-green-100);
+  --bg: var(--clr-neutral-700);
+  --bc: var(--clr-accent-green-150);
+}
+.grid > .twenty-forty-eight {
+  --fg: var(--clr-accent-blue-400);
+  --bg: var(--clr-neutral-300);
+}
+.grid > .forty-ninety-six {
+  --fg: var(--clr-accent-blue-400);
+  --bg: var(--clr-neutral-300);
+  --bc: var(--clr-accent-blue-450);
+}
+
+.end-game {
+  position: absolute;
+  inset: 5%;
+  color: var(--clr-accent-yellow-100);
+  background-color: var(--clr-neutral-950);
+  border-radius: 0.5rem;
+
+  display: none;
+  flex-direction: column;
+  gap: 1rem;
+  justify-content: center;
+  align-items: center;
+}
+
+@media (min-width: 37.5rem) {
+  .grid > div {
+    font-size: 1.5rem;
+  }
+}
+@media (min-width: 48rem) {
+  .grid > div {
+    font-size: 2rem;
+  }
+}
+
