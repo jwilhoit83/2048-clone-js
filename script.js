@@ -3,11 +3,17 @@ const scoreContainer = document.getElementById('score')
 const endGameContainer = document.getElementById('end-game-container')
 const endGameOutcome = document.getElementById('end-game')
 const endGameScore = document.getElementById('end-score')
+const biggestSquare = document.getElementById('biggest')
+const scoresListContainer = document.getElementById('scores-list')
 const playBtn = document.getElementById('play-again')
+
 let boardValues = []
 let score = 0
 const size = 4
 let movesLeft = true
+
+// object to pair each square with a class name based on value
+
 const classObj = {
   0: 'zero',
   2: 'two',
@@ -24,10 +30,11 @@ const classObj = {
   4096: 'forty-ninety-six',
 }
 
+// grabs previous scores array from local storage
+
 let previousScores = localStorage.getItem('previous')
   ? JSON.parse(localStorage.getItem('previous'))
   : []
-let scoresListContainer = document.getElementById('scores-list')
 
 startGame()
 
@@ -94,20 +101,34 @@ function updateBoard() {
   scoreContainer.innerText = score
 
   if (Math.max(...boardValues) >= 2048 && !movesLeft) {
-    previousScores.push(score)
-    localStorage.setItem('previous', JSON.stringify(previousScores))
-    populateTopScores()
-    endGameContainer.style.display = 'flex'
-    endGameOutcome.innerText = 'You Win!!!'
-    endGameScore.innerText = score
+    gameOver('You Win!!!')
   } else if (!movesLeft) {
-    previousScores.push(score)
-    localStorage.setItem('previous', JSON.stringify(previousScores))
-    populateTopScores()
-    endGameContainer.style.display = 'flex'
-    endGameOutcome.innerText = 'No Moves Left!!!'
-    endGameScore.innerText = score
+    gameOver('No Moves Left!')
   }
+}
+
+// finalizing the game and populating all end game container elements
+
+function gameOver(message) {
+  previousScores.push(score)
+  localStorage.setItem('previous', JSON.stringify(previousScores))  
+  endGameContainer.style.display = 'flex'
+  endGameOutcome.innerText = message
+  endGameScore.innerText = score
+  biggestSquare.innerText = Math.max(...boardValues)
+  populateTopScores()
+}
+
+function populateTopScores() {
+  previousScores.sort((a, b) => b - a)
+  scoresListContainer.innerHTML = ''
+
+  previousScores.slice(0, 10).forEach((score, idx) => {
+    let item = document.createElement('li')
+    // item.innerText = `${idx + 1}. ${score}`
+    item.innerText = score
+    scoresListContainer.appendChild(item)
+  })
 }
 
 // functions to handle directional movement on the game board
@@ -265,19 +286,6 @@ function checkForMoves() {
   }
 
   movesLeft = pairs || blankSpaces ? true : false
-}
-
-function populateTopScores() {
-  previousScores.sort((a, b) => b - a)
-  scoresListContainer.innerHTML = ''
-
-  // let tempScores
-
-  previousScores.slice(0, 10).forEach(score => {
-    let item = document.createElement('li')
-    item.innerText = score
-    scoresListContainer.appendChild(item)
-  })
 }
 
 // component event listeners
