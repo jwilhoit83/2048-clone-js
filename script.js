@@ -52,21 +52,7 @@ function startGame() {
   boardValues = boardValues.map(Number)
   addNewSquare()
   addNewSquare()
-  document.addEventListener('keyup', e => {
-    if (e.code === 'ArrowUp') {
-      if (e.repeat) return
-      else swipeUp()
-    } else if (e.code === 'ArrowRight') {
-      if (e.repeat) return
-      else swipeRight()
-    } else if (e.code === 'ArrowDown') {
-      if (e.repeat) return
-      else swipeDown()
-    } else if (e.code === 'ArrowLeft') {
-      if (e.repeat) return
-      else swipeLeft()
-    }
-  })
+  document.addEventListener('keyup', arrowListener)
 }
 
 function resetBoard() {
@@ -74,6 +60,7 @@ function resetBoard() {
   score = 0
   movesLeft = true
   board.innerHTML = ''
+  document.removeEventListener('keyup', arrowListener)
 }
 
 // adds a #2 to the board in a random empty spot
@@ -288,6 +275,22 @@ function checkForMoves() {
 }
 
 // component event listeners
+
+function arrowListener(e) {
+  if (e.code === 'ArrowUp') {
+    if (e.repeat) return
+    else swipeUp()
+  } else if (e.code === 'ArrowRight') {
+    if (e.repeat) return
+    else swipeRight()
+  } else if (e.code === 'ArrowDown') {
+    if (e.repeat) return
+    else swipeDown()
+  } else if (e.code === 'ArrowLeft') {
+    if (e.repeat) return
+    else swipeLeft()
+  }
+}
 
 playBtn.addEventListener('click', e => {
   e.preventDefault()
