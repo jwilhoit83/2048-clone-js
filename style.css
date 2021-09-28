@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Fira+Mono:wght@700&family=Roboto:wght@700&display=swap');
+
 html {
   --clr-neutral-100: #eceff4;
   --clr-neutral-200: #e5e9f0;
@@ -17,33 +19,38 @@ html {
   --clr-accent-blue-400: hsl(213, 32%, 52%);
   --clr-accent-blue-450: hsl(213, 32%, 32%);
 
-  --clr-accent-red-100: hsl(354, 42%, 56%);
-  --clr-accent-red-150: hsl(354, 42%, 36%);
-  --clr-accent-orange-100: hsl(14, 51%, 63%);
-  --clr-accent-orange-150: hsl(14, 51%, 43%);
-  --clr-accent-yellow-100: hsl(40, 71%, 73%);
-  --clr-accent-yellow-150: hsl(40, 71%, 53%);
-  --clr-accent-green-100: hsl(92, 28%, 65%);
-  --clr-accent-green-150: hsl(92, 28%, 45%);
-  --clr-accent-pink-100: hsl(311, 20%, 63%);
-  --clr-accent-pink-150: hsl(311, 20%, 43%);
+  --clr-accent-red-100: hsl(354, 42%, 56%, 0.8);
+  --clr-accent-red-150: hsl(354, 42%, 36%, 0.8);
+  --clr-accent-orange-100: hsl(14, 51%, 63%, 0.8);
+  --clr-accent-orange-150: hsl(14, 51%, 43%, 0.8);
+  --clr-accent-yellow-100: hsl(40, 71%, 73%, 0.8);
+  --clr-accent-yellow-150: hsl(40, 71%, 53%, 0.8);
+  --clr-accent-green-100: hsl(92, 28%, 65%, 0.8);
+  --clr-accent-green-150: hsl(92, 28%, 45%, 0.8);
+  --clr-accent-pink-100: hsl(311, 20%, 63%, 0.8);
+  --clr-accent-pink-150: hsl(311, 20%, 43%, 0.8);
 }
 
 body {
   font-family: 'Roboto', sans-serif;
+  font-weight: 700;
+  line-height: 1.2;
   color: var(--clr-neutral-300);
   background-color: var(--clr-neutral-600);
 }
 
+h1 {
+  line-height: 1.1;
+}
+
 .btn {
-  color: var(--clr-accent-pink-100);
+  color: var(--accent, var(--clr-neutral-300));
   background-color: var(--clr-neutral-700);
 
   font-size: 1.25rem;
-  font-weight: 700;
 
   border-radius: 0.5rem;
-  border: 0.125rem solid var(--clr-accent-pink-100);
+  border: 0.125rem solid var(--accent, var(--clr-neutral-300));
   cursor: pointer;
   padding: 0.5rem 1rem;
 }
@@ -53,34 +60,33 @@ body {
   flex-direction: column;
   align-items: center;
   gap: 1rem;
-  margin-top: 0.5rem;
+  margin: 1.5rem;
 }
 
 .grid {
-  max-width: max-content;
+  width: min(90%, 40rem);
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   grid-template-rows: repeat(4, 1fr);
-
-  padding: 1rem;
   margin-inline: auto;
 }
 
 .grid > div {
   position: relative;
-  margin: 0.125rem;
-  height: min(10rem, 15vw);
-  width: min(10rem, 15vw);
-  line-height: min(9rem, 13vw);
+  aspect-ratio: 1 / 1;
 
-  font-size: 1rem;
-  font-weight: 700;
-  text-align: center;
-
+  font-family: 'Fira Mono', monospace;
+  font-size: clamp(1.25rem, 5vw, 2rem);
+  
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  
   background-color: var(--bg, var(--clr-neutral-600));
   color: var(--fg);
-  border: 1vw solid var(--bc, var(--fg));
+  border: min(1vw, 0.375rem) solid var(--bc, var(--fg));
   border-radius: 0.5rem;
+  margin: 0.125rem;
 }
 
 .grid > .zero::after {
@@ -147,9 +153,10 @@ body {
 }
 
 .end-game {
+  --accent: var(--clr-accent-yellow-100);
+
   position: absolute;
   inset: 5%;
-  font-weight: 700;
   color: var(--clr-accent-neutral-300);
   background-color: var(--clr-neutral-950);
   border-radius: 0.5rem;
@@ -161,9 +168,9 @@ body {
   align-items: center;
 }
 
-.final-score {
-  color: var(--clr-accent-pink-100);
-  font-size: 2rem;
+.number-large {
+  color: var(--clr-accent-yellow-100);
+  font-size: clamp(2rem, 7vw, 3rem);
 }
 
 .scores-list {
@@ -176,31 +183,4 @@ body {
 
 .scores-list > li::marker {
   color: var(--clr-accent-blue-100);  
-}
-
-@media (min-width: 37.5rem) {
-  .grid > div {
-    font-size: 1.5rem;
-  }
-
-  .final-score {
-    font-size: 2.5rem;
-  }
-
-  .end-game {
-    gap: 1.5rem;
-  }
-}
-@media (min-width: 48rem) {
-  .grid > div {
-    font-size: 2rem;
-  }
-
-  .final-score {
-    font-size: 3rem;
-  }
-
-  .end-game {
-    gap: 2rem;
-  }
 }

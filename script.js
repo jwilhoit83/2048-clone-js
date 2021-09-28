@@ -53,6 +53,7 @@ function startGame() {
   addNewSquare()
   addNewSquare()
   document.addEventListener('keyup', arrowListener)
+  enableTouchEvents()
 }
 
 function resetBoard() {
@@ -61,6 +62,7 @@ function resetBoard() {
   movesLeft = true
   board.innerHTML = ''
   document.removeEventListener('keyup', arrowListener)
+  disableTouchEvents()
 }
 
 // adds a #2 to the board in a random empty spot
@@ -112,7 +114,7 @@ function populateTopScores() {
 
   previousScores.slice(0, 10).forEach(score => {
     let item = document.createElement('li')
-    item.innerText = score
+    item.innerText = score.toLocaleString()
     scoresListContainer.appendChild(item)
   })
 }
@@ -222,6 +224,18 @@ function swipeDown() {
   }
 }
 
+// interprets swipe and calls apropriate swipe function
+
+function handleSwipe(dx, dy) {
+  if (Math.abs(dx) >= Math.abs(dy)) {
+    if (dx > 0) swipeRight()
+    else swipeLeft()
+  } else {
+    if (dy > 0) swipeDown()
+    else swipeUp()
+  }
+}
+
 // add pairs on the gameboard in the correct order depending on which direction is chosen
 
 function addPairs(arr, direction = 'forward') {
@@ -276,6 +290,8 @@ function checkForMoves() {
 
 // component event listeners
 
+// keyboard listener for arrow key controls
+
 function arrowListener(e) {
   if (e.code === 'ArrowUp') {
     if (e.repeat) return
@@ -297,3 +313,46 @@ playBtn.addEventListener('click', e => {
   endGameContainer.style.display = 'none'
   startGame()
 })
+
+// touch event listeners to interpret swipes on touch screens
+
+function enableTouchEvents() {
+  let startX
+  let startY
+  let endX
+  let endY
+
+  document.addEventListener('touchstart', touchStartListener)
+  document.addEventListener('touchmove', touchMoveListener), { passive: false }
+  document.addEventListener('touchend', touchEndListener)
+}
+
+function disableTouchEvents() {
+  document.removeEventListener('touchstart', touchStartListener)
+  document.removeEventListener('touchmove', touchMoveListener), { passive: false }
+  document.removeEventListener('touchend', touchEndListener)
+}
+
+function touchStartListener(e) {
+  let touchObj = e.changedTouches[0]
+  startX = touchObj.pageX
+  startY = touchObj.pageY
+}
+
+function touchMoveListener(e) {
+  e.preventDefault()
+  e.stopPropagation()
+}
+
+function touchEndListener(e) {
+  let touchObj = e.changedTouches[0]
+  endX = touchObj.pageX
+  endY = touchObj.pageY
+
+  let dx = endX - startX
+  let dy = endY - startY
+
+  if (Math.abs(dx) > 25 || Math.abs(dy) > 25) {
+    handleSwipe(dx, dy)
+  }
+}
