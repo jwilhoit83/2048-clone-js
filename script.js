@@ -7,9 +7,9 @@ const biggestSquare = document.getElementById('biggest')
 const scoresListContainer = document.getElementById('scores-list')
 const playBtn = document.getElementById('play-again')
 
+const size = 4
 let boardValues = []
 let score = 0
-const size = 4
 let movesLeft = true
 
 // object to pair each square with a class name based on value
@@ -111,7 +111,7 @@ function updateBoard() {
 
 function gameOver(message) {
   previousScores.push(score)
-  localStorage.setItem('previous', JSON.stringify(previousScores))  
+  localStorage.setItem('previous', JSON.stringify(previousScores))
   endGameContainer.style.display = 'flex'
   endGameOutcome.innerText = message
   endGameScore.innerText = score
@@ -123,9 +123,8 @@ function populateTopScores() {
   previousScores.sort((a, b) => b - a)
   scoresListContainer.innerHTML = ''
 
-  previousScores.slice(0, 10).forEach((score, idx) => {
+  previousScores.slice(0, 10).forEach(score => {
     let item = document.createElement('li')
-    // item.innerText = `${idx + 1}. ${score}`
     item.innerText = score
     scoresListContainer.appendChild(item)
   })
