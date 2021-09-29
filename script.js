@@ -362,13 +362,13 @@ function enableTouchEvents() {
   let endY
 
   document.addEventListener('touchstart', touchStartListener)
-  document.addEventListener('touchmove', touchMoveListener), { passive: false }
+  document.addEventListener('touchmove', touchMoveListener, { passive: false })
   document.addEventListener('touchend', touchEndListener)
 }
 
 function disableTouchEvents() {
   document.removeEventListener('touchstart', touchStartListener)
-  document.removeEventListener('touchmove', touchMoveListener), { passive: false }
+  document.removeEventListener('touchmove', touchMoveListener, { passive: false })
   document.removeEventListener('touchend', touchEndListener)
 }
 
