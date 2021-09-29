@@ -1,3 +1,4 @@
+const themeToggle = document.getElementById('theme-toggle')
 const board = document.getElementById('game-board')
 const scoreContainer = document.getElementById('score')
 const endGameContainer = document.getElementById('end-game-container')
@@ -30,6 +31,8 @@ const classObj = {
   1024: 'ten-twenty-four',
   2048: 'twenty-forty-eight',
   4096: 'forty-ninety-six',
+  8192: 'eighty-one-ninety-two',
+  16384: 'sixteen-three-eighty-four',
 }
 
 // grabs previous scores array from local storage
@@ -38,7 +41,18 @@ let previousScores = localStorage.getItem('previous')
   ? JSON.parse(localStorage.getItem('previous'))
   : []
 
+checkTheme()
 startGame()
+
+// sets theme based on theme toggle position
+
+function checkTheme() {
+  if (themeToggle.checked) {
+    document.body.className = 'dark-theme'
+  } else {
+    document.body.className = 'light-theme'
+  }
+}
 
 // clears all previous game data and starts a new game with a fresh board
 
@@ -91,7 +105,7 @@ function updateBoard() {
       board.children[idx].innerText = val
       board.children[idx].className = classObj[val]
     }
-    if(val !== previousValues[idx] && val !== 0){
+    if (val !== previousValues[idx] && val !== 0) {
       board.children[idx].classList.add(previousDirection)
     }
   })
@@ -149,7 +163,7 @@ function swipeLeft() {
     boardValues = newValues.slice()
     previousDirection = 'left-swipe'
     addNewSquare()
-  }  
+  }
 }
 
 function swipeRight() {
@@ -171,7 +185,7 @@ function swipeRight() {
     boardValues = newValues.slice()
     previousDirection = 'right-swipe'
     addNewSquare()
-  }  
+  }
 }
 
 function swipeUp() {
@@ -309,6 +323,12 @@ function checkForMoves() {
 
 // component event listeners
 
+
+// listener for theme toggle adding appropriate class to change theme
+
+themeToggle.addEventListener('change', checkTheme)
+
+
 // keyboard listener for arrow key controls
 
 function arrowListener(e) {
@@ -375,3 +395,5 @@ function touchEndListener(e) {
     handleSwipe(dx, dy)
   }
 }
+
+
