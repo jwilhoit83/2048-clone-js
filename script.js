@@ -9,8 +9,10 @@ const playBtn = document.getElementById('play-again')
 
 const size = 4
 let boardValues = []
+let previousValues = []
 let score = 0
 let movesLeft = true
+let previousDirection = 'null'
 
 // object to pair each square with a class name based on value
 
@@ -48,6 +50,7 @@ function startGame() {
     square.innerText = 0
     board.appendChild(square)
     boardValues.push(square.innerText)
+    previousValues.push(0)
   }
   boardValues = boardValues.map(Number)
   addNewSquare()
@@ -71,7 +74,7 @@ function addNewSquare() {
   if (boardValues.includes(0)) {
     const random = Math.floor(Math.random() * size ** 2)
     if (boardValues[random] === 0) {
-      boardValues[random] = 2
+      boardValues[random] = '2'
       updateBoard()
     } else addNewSquare()
   }
@@ -80,13 +83,20 @@ function addNewSquare() {
 // updates the values of the tiles and checks for end game scenarios
 
 function updateBoard() {
-  checkForMoves()
-
   boardValues.forEach((val, idx) => {
-    board.children[idx].innerText = val
-    board.children[idx].className = classObj[val]
+    if (val === '2') {
+      board.children[idx].innerText = '2'
+      board.children[idx].className = 'new two'
+    } else {
+      board.children[idx].innerText = val
+      board.children[idx].className = classObj[val]
+    }
+    if(val !== previousValues[idx] && val !== 0){
+      board.children[idx].classList.add(previousDirection)
+    }
   })
 
+  checkForMoves()
   scoreContainer.innerText = score
 
   if (Math.max(...boardValues) >= 2048 && !movesLeft) {
@@ -135,9 +145,11 @@ function swipeLeft() {
   if (boardValues.join('') === newValues.join('')) {
     return
   } else {
+    previousValues = boardValues.slice()
     boardValues = newValues.slice()
+    previousDirection = 'left-swipe'
     addNewSquare()
-  }
+  }  
 }
 
 function swipeRight() {
@@ -155,9 +167,11 @@ function swipeRight() {
   if (boardValues.join('') === newValues.join('')) {
     return
   } else {
+    previousValues = boardValues.slice()
     boardValues = newValues.slice()
+    previousDirection = 'right-swipe'
     addNewSquare()
-  }
+  }  
 }
 
 function swipeUp() {
@@ -187,7 +201,9 @@ function swipeUp() {
   if (boardValues.join('') === newValues.join('')) {
     return
   } else {
+    previousValues = boardValues.slice()
     boardValues = newValues.slice()
+    previousDirection = 'up-swipe'
     addNewSquare()
   }
 }
@@ -219,7 +235,9 @@ function swipeDown() {
   if (boardValues.join('') === newValues.join('')) {
     return
   } else {
+    previousValues = boardValues.slice()
     boardValues = newValues.slice()
+    previousDirection = 'down-swipe'
     addNewSquare()
   }
 }
@@ -264,6 +282,7 @@ function addPairs(arr, direction = 'forward') {
 function checkForMoves() {
   let pairs = false
   let blankSpaces = boardValues.includes(0)
+  boardValues = boardValues.map(Number)
 
   for (let i = 0; i < boardValues.length; i += size) {
     if (

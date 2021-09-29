@@ -89,12 +89,22 @@ h1 {
   margin: 0.125rem;
 }
 
+.grid > .zero {
+  color: var(--clr-neutral-900);
+  z-index: -2;
+}
+
 .grid > .zero::after {
   content: '';
   position: absolute;
   inset: 0;
   border-radius: 0.5rem;
   background-color: var(--clr-neutral-900);
+  z-index: -1;
+}
+
+.grid > .new {
+  animation: fadein 0.4s ease-in-out;  
 }
 
 .grid > .two {
@@ -183,4 +193,64 @@ h1 {
 
 .scores-list > li::marker {
   color: var(--clr-accent-blue-100);  
+}
+
+.left-swipe {
+  animation: left-swipe 0.2s ease-in-out;
+}
+.right-swipe {
+  animation: right-swipe 0.2s ease-in-out;
+}
+.up-swipe {
+  animation: up-swipe 0.2s ease-in-out;
+}
+.down-swipe {
+  animation: down-swipe 0.2s ease-in-out;
+}
+
+@keyframes fadein {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes left-swipe {
+  from {
+    transform: translateX(2vw);
+  }
+
+  to {
+    transform: translateX(0);
+  }
+}
+@keyframes right-swipe {
+  from {
+    transform: translateX(-2vw);
+  }
+
+  to {
+    transform: translateX(0);
+  }
+}
+@keyframes up-swipe {
+  from {
+    transform: translateY(2vw);
+  }
+
+  to {
+    transform: translateX(0);
+  }
+}
+@keyframes down-swipe {
+  from {
+    transform: translateY(-2vw);
+  }
+
+  to {
+    transform: translateX(0);
+  }
 }
