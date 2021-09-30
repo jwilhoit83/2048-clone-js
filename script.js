@@ -4,7 +4,8 @@ const scoreContainer = document.getElementById('score')
 const endGameContainer = document.getElementById('end-game-container')
 const endGameOutcome = document.getElementById('end-game')
 const endGameScore = document.getElementById('end-score')
-const biggestSquare = document.getElementById('biggest')
+const biggestSquareContainer = document.getElementById('biggest')
+const biggestSquareHistoryContainer = document.getElementById('biggest-history')
 const scoresListContainer = document.getElementById('scores-list')
 const playBtn = document.getElementById('play-again')
 
@@ -35,11 +36,14 @@ const classObj = {
   16384: 'sixteen-three-eighty-four',
 }
 
-// grabs previous scores array from local storage
+// grabs previous scores array and all time biggest tile from local storage
 
 let previousScores = localStorage.getItem('previous')
   ? JSON.parse(localStorage.getItem('previous'))
   : []
+let biggestSquareHistory = localStorage.getItem('bigSquare')
+  ? localStorage.getItem('bigSquare')
+  : '2'
 
 checkTheme()
 startGame()
@@ -47,11 +51,9 @@ startGame()
 // sets theme based on theme toggle position
 
 function checkTheme() {
-  if (themeToggle.checked) {
-    document.body.className = 'dark-theme'
-  } else {
-    document.body.className = 'light-theme'
-  }
+  themeToggle.checked
+    ? (document.body.className = 'dark-theme')
+    : (document.body.className = 'light-theme')
 }
 
 // clears all previous game data and starts a new game with a fresh board
@@ -123,17 +125,27 @@ function updateBoard() {
 // finalizing the game and populating all end game container elements
 
 function gameOver(message) {
-  previousScores.push(score)
-  localStorage.setItem('previous', JSON.stringify(previousScores))
+  let biggestSquare = Math.max(...boardValues)
+  biggestSquareHistory =
+    biggestSquare > Number(biggestSquareHistory)
+      ? biggestSquare.toString()
+      : localStorage.getItem('bigSquare')
+      
+  localStorage.setItem('bigSquare', biggestSquareHistory)
+
   endGameContainer.style.display = 'flex'
   endGameOutcome.innerText = message
   endGameScore.innerText = score
-  biggestSquare.innerText = Math.max(...boardValues)
+  biggestSquareContainer.innerText = biggestSquare
+  biggestSquareHistoryContainer.innerText = biggestSquareHistory
+
   populateTopScores()
 }
 
 function populateTopScores() {
+  previousScores.push(score)
   previousScores.sort((a, b) => b - a)
+  localStorage.setItem('previous', JSON.stringify(previousScores.slice(0, 10)))
   scoresListContainer.innerHTML = ''
 
   previousScores.slice(0, 10).forEach(score => {
@@ -260,11 +272,9 @@ function swipeDown() {
 
 function handleSwipe(dx, dy) {
   if (Math.abs(dx) >= Math.abs(dy)) {
-    if (dx > 0) swipeRight()
-    else swipeLeft()
+    dx > 0 ? swipeRight() : swipeLeft()
   } else {
-    if (dy > 0) swipeDown()
-    else swipeUp()
+    dy > 0 ? swipeDown() : swipeUp()
   }
 }
 
@@ -323,11 +333,9 @@ function checkForMoves() {
 
 // component event listeners
 
-
 // listener for theme toggle adding appropriate class to change theme
 
 themeToggle.addEventListener('change', checkTheme)
-
 
 // keyboard listener for arrow key controls
 
@@ -395,5 +403,3 @@ function touchEndListener(e) {
     handleSwipe(dx, dy)
   }
 }
-
-

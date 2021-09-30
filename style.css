@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Fira+Mono:wght@700&family=Roboto:wght@700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Fira+Mono:wght@700&display=swap');
 
 .light-theme {
   --clr-neutral-100: hsl(166, 15%, 28%);
@@ -18,15 +18,14 @@
   --clr-primary-550: hsl(180, 24%, 29%);
   --clr-primary-600: hsl(311, 20%, 63%);
   --clr-primary-650: hsl(311, 20%, 43%);
-
-  --clr-accent-100: var(--clr-neutral-700);
-  --clr-accent-200: var(--clr-primary-100);
+  
+  --clr-accent-100: var(--clr-primary-100);
 
   --clr-eg-bg: rgba(0, 0, 0, 0.6);
   --clr-eg-fg: var(--clr-neutral-700);
 
-  --clr-btn-bg: var(--clr-primary-150);
-  --clr-btn-fg: hsl(356, 100%, 91%);
+  --clr-btn-bg: var(--clr-neutral-700);
+  --clr-btn-fg: var(--clr-primary-500);
 
   --clr-toggle-bg: hsl(180, 24%, 29%, 0.4);
   --clr-toggle-fg: var(--clr-primary-500);
@@ -51,7 +50,7 @@
   --clr-primary-600: hsl(311, 20%, 63%, 0.8);
   --clr-primary-650: hsl(311, 20%, 43%, 0.8);
 
-  --clr-accent-200: hsl(179, 25%, 65%, 0.8);
+  --clr-accent-100: hsl(179, 25%, 65%, 0.8);
 
   --clr-eg-bg: hsl(220, 16%, 22%, 0.9);
   --clr-eg-fg: hsl(219, 28%, 88%);
@@ -59,7 +58,7 @@
   --clr-btn-bg: hsl(220, 16%, 36%);
   --clr-btn-fg: hsl(40, 71%, 73%, 0.8);
 
-  --clr-toggle-bg: hsl(220, 16%, 22%);
+  --clr-toggle-bg: hsl(220, 16%, 22%, 0.4);
   --clr-toggle-fg: hsl(311, 20%, 63%, 0.8);
 }
 
@@ -68,7 +67,7 @@
 /* ===--------------------=== */
 
 body {
-  font-family: 'Roboto', sans-serif;
+  font-family: 'Fira Mono', monospace;
   font-weight: 700;
   line-height: 1.2;
   color: var(--clr-neutral-100);
@@ -104,13 +103,12 @@ h1 {
 
 .number-large {
   color: var(--clr-btn-fg);
-  font-family: 'Fira Mono', monospace;
   font-size: clamp(2rem, 7vw, 3rem);
   line-height: 1
 }
 
 .accent-text {
-  color: var(--clr-accent-200);
+  color: var(--clr-accent-100);
 }
 
 /* ===----------------=== */
@@ -135,7 +133,6 @@ h1 {
 
 .title {
   font-size: clamp(2rem, 7vw, 3rem);
-  font-family: 'Fira Mono', monospace;
   color: var(--clr-toggle-fg);
   opacity: 0.75;
 }
@@ -180,7 +177,6 @@ h1 {
   position: relative;
   aspect-ratio: 1 / 1;
 
-  font-family: 'Fira Mono', monospace;
   font-size: clamp(1.25rem, 5vw, 2rem);
 
   display: flex;
@@ -259,21 +255,23 @@ h1 {
 }
 .grid > .twenty-forty-eight {
   --fg: var(--clr-primary-100);
-  --bg: var(--clr-neutral-100);
+  --bg: var(--clr-neutral-800);
+  --bc: var(--clr-primary-200);
 }
 .grid > .forty-ninety-six {
   --fg: var(--clr-primary-100);
-  --bg: var(--clr-neutral-100);
-  --bc: var(--clr-primary-150);
+  --bg: var(--clr-neutral-800);
+  --bc: var(--clr-primary-250);
 }
 .grid > .eighty-one-ninety-two {
   --fg: var(--clr-primary-200);
-  --bg: var(--clr-neutral-100);
+  --bg: var(--clr-neutral-800);
+  --bc: var(--clr-primary-300);
 }
 .grid > .sixteen-three-eighty-four {
   --fg: var(--clr-primary-200);
-  --bg: var(--clr-neutral-100);
-  --bc: var(--clr-primary-250);
+  --bg: var(--clr-neutral-800);
+  --bc: var(--clr-primary-350);
 }
 
 .end-game {
@@ -285,8 +283,9 @@ h1 {
 
   display: none;
   flex-direction: column;
-  justify-content: space-evenly;
+  justify-content: center;
   align-items: center;
+  gap: clamp(2rem, 7vw, 3rem);
 }
 
 .header-flex > div,
@@ -300,14 +299,14 @@ h1 {
 
 .scores-list {
   columns: 2;
-  column-gap: 3rem;
-  color: var(--clr-accent-100, var(--clr-neutral-100));
+  column-gap: 5rem;
+  color: var(--clr-eg-fg);
   padding: 0;
   margin: 0;
 }
 
 .scores-list > li::marker {
-  color: var(--clr-accent-200, var(--clr-btn-fg));
+  color: var(--clr-accent-100, var(--clr-btn-fg));
 }
 
 .left-swipe {
@@ -315,7 +314,7 @@ h1 {
   animation: swipeX 0.1s ease-out;
 }
 .right-swipe {
-  --translate: -.25rem;
+  --translate: 0.25rem;
   animation: swipeX 0.1s ease-out;
 }
 .up-swipe {
