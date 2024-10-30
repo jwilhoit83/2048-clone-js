@@ -52,7 +52,7 @@ startGame()
 
 function checkTheme() {
   themeToggle.checked
-    ? (document.body.className = 'dark-theme')
+    ? (document.body.className = 'gruv-theme')
     : (document.body.className = 'light-theme')
 }
 

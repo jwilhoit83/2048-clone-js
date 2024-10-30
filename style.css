@@ -62,6 +62,37 @@
   --clr-toggle-fg: hsl(311, 20%, 63%, 0.8);
 }
 
+.gruv-theme {
+    --clr-neutral-100: hsl(43, 59%, 81%);
+    --clr-neutral-700: hsl(28, 11%, 44%);
+    --clr-neutral-800: hsl(27, 10%, 36%);
+    --clr-neutral-900: hsl(22, 7%, 29%);
+  
+    --clr-primary-100: hsl(157, 16%, 58%, 0.8);
+    --clr-primary-150: hsl(183, 33%, 40%, 0.8);
+    --clr-primary-200: hsl(344, 47%, 68%, 0.8);
+    --clr-primary-250: hsl(333, 34%, 54%, 0.8);
+    --clr-primary-300: hsl(27, 99%, 55%, 0.8);
+    --clr-primary-350: hsl(24, 88%, 45%, 0.8);
+    --clr-primary-400: hsl(42, 95%, 58%, 0.8);
+    --clr-primary-450: hsl(40, 73%, 49%, 0.8);
+    --clr-primary-500: hsl(61, 66%, 44%, 0.8);
+    --clr-primary-550: hsl(60, 71%, 35%, 0.8);
+    --clr-primary-600: hsl(104, 35%, 62%, 0.8);
+    --clr-primary-650: hsl(122, 21%, 51%, 0.8);
+  
+    --clr-accent-100: hsl(157, 16%, 58%);
+  
+    --clr-eg-bg: hsl(22, 7%, 29%, 0.9);
+    --clr-eg-fg: hsl(43, 59%, 81%);
+  
+    --clr-btn-bg: hsl(28, 11%, 44%);
+    --clr-btn-fg: hsl(42, 95%, 58%, 0.8);
+  
+    --clr-toggle-bg: hsl(22, 7%, 29%, 0.4);
+    --clr-toggle-fg: hsl(104, 35%, 62%, 0.8);
+}
+
 /* ===--------------------=== */
 /* ===-- General styles --=== */
 /* ===--------------------=== */
